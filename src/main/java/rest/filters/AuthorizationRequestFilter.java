@@ -27,7 +27,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
         Boolean isCorrectAuth = serviceAuthentication.checkToken(authCredentials,LIMIT_TIME_SECONS,LIMIT_TIME_MINUTS);
 
         if (!isCorrectAuth) {
-            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+            throw new WebApplicationException(Response.Status.TOO_MANY_REQUESTS);
         }
     }
 }
