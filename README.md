@@ -14,6 +14,7 @@ GET - /time - Return timestamp on machine
 ```
 mvn clean
 mvn package
+cd target
 java -jar jetty-webservice-1.0-SNAPSHOT.jar 
 ```
 
