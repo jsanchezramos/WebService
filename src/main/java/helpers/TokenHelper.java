@@ -2,13 +2,11 @@ package helpers;
 
 import model.Time;
 
-
 import java.sql.Timestamp;
 
 public class TokenHelper {
 
-    private static final int MAX_AUTH = 3;
-    private static final int MAX_MIN = 60;
+    private static final int MAX_AUTH = 2;
 
     public static Time getTimeObject(){
         return new Time(new Timestamp(System.currentTimeMillis()));
@@ -20,9 +18,6 @@ public class TokenHelper {
         long milliseconds = timestamp2.getTime() - timestamp.getTime();
         int seconds = (int) milliseconds / 1000;
         seconds = (seconds % 3600) % 60;
-
-        System.out.print("Diferencia: "+seconds);
-
         return seconds;
     }
 
@@ -32,7 +27,6 @@ public class TokenHelper {
         long milliseconds = timestamp2.getTime() - timestamp.getTime();
         int seconds = (int) milliseconds / 1000;
         int minutes = (seconds % 3600) / 60;
-        System.out.print("DiferenciaMINUTES : "+minutes);
         return minutes;
     }
 

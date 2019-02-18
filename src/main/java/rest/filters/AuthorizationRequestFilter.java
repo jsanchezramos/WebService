@@ -16,13 +16,15 @@ import javax.ws.rs.ext.Provider;
 public class AuthorizationRequestFilter implements ContainerRequestFilter {
 
     private static final String AUTHENTICATION_HEADER = "Authorization";
+    private static final int LIMIT_TIME_SECONS = 60;
+    private static final int LIMIT_TIME_MINUTS = 1;
     private ServiceAuthentication serviceAuthentication = new ServiceAuthentication(new MemoryRepository());
 
     @Override
     public void filter(ContainerRequestContext containerRequestContext) throws WebApplicationException {
 
         String authCredentials = containerRequestContext.getHeaderString(AUTHENTICATION_HEADER);
-        Boolean isCorrectAuth = serviceAuthentication.checkToken(authCredentials);
+        Boolean isCorrectAuth = serviceAuthentication.checkToken(authCredentials,LIMIT_TIME_SECONS,LIMIT_TIME_MINUTS);
 
         if (!isCorrectAuth) {
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);

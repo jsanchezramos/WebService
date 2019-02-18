@@ -22,7 +22,11 @@ public class MemoryRepository implements TokenRepository {
     public Boolean addToken(Token token) {
         Boolean isOk = true;
         try{
-            lToken.add(token);
+            if(token != null){
+                lToken.add(token);
+            }else{
+                isOk = false;
+            }
         }catch (Exception es){
             isOk = false;
             LOG.info("Error update token",es);
@@ -33,18 +37,19 @@ public class MemoryRepository implements TokenRepository {
     @Override
     public Boolean updateToken(Token token) {
         Boolean isOk = true;
-
         try{
-            OptionalInt indexOpt = IntStream.range(0, lToken.size())
-                    .filter(i -> token.getToken().equals(lToken.get(i).getToken()))
-                    .findFirst();
-            lToken.set(indexOpt.getAsInt(),token);
-
+            if(token!= null){
+                OptionalInt indexOpt = IntStream.range(0, lToken.size())
+                        .filter(i -> token.getToken().equals(lToken.get(i).getToken()))
+                        .findFirst();
+                lToken.set(indexOpt.getAsInt(),token);
+            }else {
+                isOk = false;
+            }
         }catch (Exception es){
             isOk = false;
             LOG.info("Error update token",es);
         }
-
         return isOk;
     }
 }
